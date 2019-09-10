@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>日付の計算 - 例1</title>
+<script type="text/javascript">
+function fnChangeDate() {
+    var num = parseInt(document.getElementById('num').value, 10);
+    var ym = document.getElementById('ym').value;
+    var dt = new Date(ym + '-01');
+    if(document.getElementById('drop').selectedIndex == 0) {
+        dt.setFullYear(dt.getFullYear() + num);
+    } else {
+        dt.setMonth(dt.getMonth() + num);
+    }
+    var y = dt.getFullYear();
+    var m = dt.getMonth() + 1;
+    var txt = y + '/' + (m < 10 ? '0' + m : m);
+    document.getElementById('label').innerText = txt;
+}
+</script>
+</head>
+<body onload="fnChangeDate()">
+    <p>
+        <input type="month" id="ym" value="2019-09" onchange="fnChangeDate()">
+        <span>の</span>
+        <input type="number" min="1" max="999" id="num" value="2" onchange="fnChangeDate()">
+        <select id="drop" onchange="fnChangeDate()">
+            <option selected>年後</option>
+            <option>ヶ月後</option>
+        </select>
+        <span>⇒</span>
+        <label id="label">(エラー)</label>
+    </p>
+    <p><a href="./index.html">戻る</a></p>
+</body>
+</html>

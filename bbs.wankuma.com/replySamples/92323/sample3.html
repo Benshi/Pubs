@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>日付の計算 - 例3</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
+<script type="text/javascript">
+"use strict";
+$(() => {
+    $('#ym,#num,#drop').on('change', () => {
+        var num = parseInt($('#num').val(), 10);
+        var act = $('#drop').val();
+        var dt = new Date($('#ym').val() + '-01');
+        dt[`set${act}`](num + dt[`get${act}`]());
+        $('#label').text(`${dt.getFullYear()}/${('0' + (dt.getMonth() + 1)).slice(-2)}`);
+    });
+    $('#ym').change();
+});
+</script>
+</head>
+<body>
+    <p>
+        <input type="month" id="ym" value="2019-09">
+        <span>の</span>
+        <input type="number" min="1" max="999" id="num" value="2">
+        <select id="drop">
+            <option value="FullYear" selected>年後</option>
+            <option value="Month">ヶ月後</option>
+        </select>
+        <span>⇒</span>
+        <label id="label">(エラー)</label>
+    </p>
+    <p><a href="./index.html">戻る</a></p>
+</body>
+</html>
